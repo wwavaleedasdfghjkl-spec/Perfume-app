@@ -5,6 +5,16 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import oxyLogo from '@assets/3142d298-af27-41d9-87f9-e790964b6747_1788717723123.jpeg';
+import productImage0 from '@assets/0_5b9f1036-0883-446b-9940-6c7979cc2d9a_1788718963632.jpeg';
+import productImage1 from '@assets/1_251619fc-1610-44aa-9e14-b843ca7105be_1788718963636.jpeg';
+import productImage2 from '@assets/2_5d1413b5-30f5-4b92-ae3a-14942c61ae07_1788718963636.jpeg';
+import productImage3 from '@assets/3_6f0d66c9-e203-4cee-bfe9-55f0bf4217e7_1788718963636.jpeg';
+import productImage4 from '@assets/4_7fb0f374-a450-405a-b6b9-43547fb3cf93_1788718963636.jpeg';
+import productImage5 from '@assets/5_84e09b8a-ab85-4b31-ad41-8d99a039482a_1788718963636.jpeg';
+import productImage6 from '@assets/6_1d7eb4bc-8f87-4b5e-b86c-d0bea790f890_1788718963636.jpeg';
+import productImage7 from '@assets/7_174e207c-118d-41c0-ad37-eebb1ab8ae3c_1788718963636.jpeg';
+import productImage8 from '@assets/8_5f243dfe-b51e-456f-9786-6aa530de4b9c_1788718963636.jpeg';
+import productImage9 from '@assets/9_7220562e-4303-4691-8d49-c70b70fd9174_1788718963637.jpeg';
 import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import NotFound from '@/pages/not-found';
 
@@ -14,17 +24,27 @@ type Product = {
   name: string;
   latin: string;
   notes: string;
-  price: number;
+  price: number | null;
   color: string;
+  image: string;
 };
 
-type CartItem = Product & { quantity: number };
+type PricedProduct = Product & { price: number };
+type CartItem = PricedProduct & { quantity: number };
 
 // Product prices are intentionally centralized here for easy future editing.
+// Product names and prices are intentionally blank until the catalog details are provided.
 const PRODUCTS: Product[] = [
-  { id: 'sahar', number: '01', name: 'سَحَر', latin: 'SAHAR', notes: 'زعفران · عنبر · خشب الصندل', price: 85000, color: 'sage' },
-  { id: 'athir', number: '02', name: 'أثير', latin: 'ATHIR', notes: 'ورد طائفي · لبان · مسك أبيض', price: 78000, color: 'amber' },
-  { id: 'layl', number: '03', name: 'لَيْل', latin: 'LAYL', notes: 'عود كمبودي · فانيلا · جلد ناعم', price: 92000, color: 'plum' },
+  { id: 'product-01', number: '01', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage0 },
+  { id: 'product-02', number: '02', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage1 },
+  { id: 'product-03', number: '03', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage2 },
+  { id: 'product-04', number: '04', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage3 },
+  { id: 'product-05', number: '05', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage4 },
+  { id: 'product-06', number: '06', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage5 },
+  { id: 'product-07', number: '07', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage6 },
+  { id: 'product-08', number: '08', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage7 },
+  { id: 'product-09', number: '09', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage8 },
+  { id: 'product-10', number: '10', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage9 },
 ];
 
 // WhatsApp number for orders — update here if the customer service line changes.
@@ -69,7 +89,7 @@ function Home() {
   const [checkout, setCheckout] = useState({ name: '', phone: '', address: '', city: '', notes: '' });
 
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
-  const cartTotal = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
+  const cartTotal = useMemo(() => cart.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0), [cart]);
 
   const goTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -77,10 +97,12 @@ function Home() {
   };
 
   const addToCart = (product: Product) => {
+    if (product.price === null) return;
+    const pricedProduct = product as PricedProduct;
     setCart((current) => {
-      const existing = current.find((item) => item.id === product.id);
-      if (existing) return current.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
-      return [...current, { ...product, quantity: 1 }];
+      const existing = current.find((item) => item.id === pricedProduct.id);
+      if (existing) return current.map((item) => item.id === pricedProduct.id ? { ...item, quantity: item.quantity + 1 } : item);
+      return [...current, { ...pricedProduct, quantity: 1 }];
     });
     setCartOpen(true);
   };
@@ -177,26 +199,25 @@ function Home() {
             <Reveal className="section-top">
               <div>
                 <SectionEyebrow>THE COLLECTION · 2024</SectionEyebrow>
-                <h2 className="section-heading">ثلاثة أوجه<br /><span className="gold">للحضور</span></h2>
+                <h2 className="section-heading">عشرة أوجه<br /><span className="gold">للحضور</span></h2>
               </div>
               <p className="section-intro">روائح تُلبس مثل ذكرى. كل زجاجة تركيبة محدودة، مصمّمة لتصبح جزءاً من حكايتك لا كل الحكاية.</p>
-              <span className="collection-index">01 — 03</span>
+              <span className="collection-index">01 — 10</span>
             </Reveal>
             <div className="products-grid">
               {PRODUCTS.map((product, index) => (
                 <Reveal key={product.id} className={index === 1 ? 'reveal-delay-1' : index === 2 ? 'reveal-delay-2' : ''}>
                   <article className="product-card" data-testid={`card-product-${product.id}`}>
-                    {/* Product image placeholder: swap this CSS bottle composition for real product photography later. */}
-                    <div className={`product-art ${product.color}`} data-testid={`img-product-placeholder-${product.id}`}>
-                      <div className="bottle" aria-label={`تصوير تجريدي لزجاجة ${product.name}`} />
+                    <div className={`product-art ${product.color}`} data-testid={`img-product-${product.id}`}>
+                      <img className="product-photo" src={product.image} alt={product.name ? `صورة ${product.name}` : `صورة المنتج رقم ${product.number}`} />
                     </div>
                     <div className="product-info">
                       <span className="product-number">{product.number}</span>
-                      <h3 className="product-name">{product.name} <span className="product-latin">{product.latin}</span></h3>
-                      <p className="product-notes">{product.notes}</p>
+                      <h3 className="product-name">{product.name || '\u00a0'} {product.latin && <span className="product-latin">{product.latin}</span>}</h3>
+                      <p className="product-notes">{product.notes || '\u00a0'}</p>
                       <div className="product-bottom">
-                        <span className="price" data-testid={`text-price-${product.id}`}>{formatIQD(product.price)} <small>50 مل</small></span>
-                        <button className="add-button" aria-label={`أضف ${product.name} إلى السلة`} data-testid={`button-add-${product.id}`} onClick={() => addToCart(product)}>
+                        <span className={`price ${product.price === null ? 'price-pending' : ''}`} data-testid={`text-price-${product.id}`}>{product.price === null ? 'السعر يحدد لاحقاً' : formatIQD(product.price)} {product.price !== null && <small>50 مل</small>}</span>
+                        <button className="add-button" aria-label={product.price === null ? 'السعر غير محدد بعد' : `أضف ${product.name} إلى السلة`} data-testid={`button-add-${product.id}`} onClick={() => addToCart(product)} disabled={product.price === null}>
                           <Plus size={16} strokeWidth={1.3} />
                         </button>
                       </div>
@@ -316,7 +337,7 @@ function Home() {
             <div className="cart-list">
               {cart.length === 0 ? <div className="cart-empty" data-testid="text-empty-cart">سلتك هادئة الآن.<br /><small>أضف عطراً ليبدأ الأثر.</small></div> : cart.map((item) => (
                 <div className="cart-item" key={item.id} data-testid={`row-cart-item-${item.id}`}>
-                  <div className="cart-thumb" />
+                   <div className="cart-thumb"><img src={item.image} alt="" /></div>
                   <div><h3>{item.name} <span className="product-latin">{item.latin}</span></h3><p>{formatIQD(item.price)} للزجاجة</p><div className="qty-controls"><button aria-label={`إنقاص كمية ${item.name}`} data-testid={`button-decrease-${item.id}`} onClick={() => changeQuantity(item.id, -1)}><Minus size={12} /></button><span data-testid={`text-quantity-${item.id}`}>{item.quantity}</span><button aria-label={`زيادة كمية ${item.name}`} data-testid={`button-increase-${item.id}`} onClick={() => changeQuantity(item.id, 1)}><Plus size={12} /></button></div></div>
                   <div className="cart-item-price">{formatIQD(item.price * item.quantity)}</div>
                 </div>
