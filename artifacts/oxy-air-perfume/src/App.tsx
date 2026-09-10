@@ -84,6 +84,7 @@ function Home() {
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [sent, setSent] = useState(false);
+  const [imagePreview, setImagePreview] = useState<Product | null>(null);
   const [checkout, setCheckout] = useState({ name: '', phone: '', address: '', city: '', notes: '' });
 
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
@@ -201,7 +202,9 @@ function Home() {
                 <Reveal key={product.id} className={index === 1 ? 'reveal-delay-1' : index === 2 ? 'reveal-delay-2' : ''}>
                   <article className="product-card" data-testid={`card-product-${product.id}`}>
                     <div className={`product-art ${product.color}`} data-testid={`img-product-${product.id}`}>
-                      <img className="product-photo" src={product.image} alt={product.name ? `صورة ${product.name}` : `صورة المنتج رقم ${product.number}`} />
+                      <button className="product-image-button" type="button" onClick={() => setImagePreview(product)} aria-label={`عرض صورة المنتج رقم ${product.number} بالحجم الكامل`}>
+                        <img className="product-photo" src={product.image} alt={product.name ? `صورة ${product.name}` : `صورة المنتج رقم ${product.number}`} />
+                      </button>
                     </div>
                     <div className="product-info">
                       <span className="product-number">{product.number}</span>
@@ -279,6 +282,13 @@ function Home() {
         </section>
 
       </main>
+
+      {imagePreview && (
+        <div className="image-modal" role="dialog" aria-modal="true" aria-label={`صورة المنتج رقم ${imagePreview.number}`} onClick={() => setImagePreview(null)}>
+          <button className="image-modal-close" type="button" aria-label="إغلاق الصورة" onClick={() => setImagePreview(null)}><X size={22} strokeWidth={1.2} /></button>
+          <img src={imagePreview.image} alt={imagePreview.name ? `صورة ${imagePreview.name}` : `صورة المنتج رقم ${imagePreview.number}`} onClick={(event) => event.stopPropagation()} />
+        </div>
+      )}
 
       <footer className="footer" id="contact">
         <div className="container">

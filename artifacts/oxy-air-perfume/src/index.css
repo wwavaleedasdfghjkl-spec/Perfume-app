@@ -128,12 +128,16 @@ a { color: inherit; text-decoration: none; }
 .product-card:nth-child(2) { transform:translateY(42px); }
 .product-card:hover { transform:translateY(-10px); border-color:rgba(201,169,97,.7); }
 .product-card:nth-child(2):hover { transform:translateY(32px); }
-.product-art { height:360px; display:grid; place-items:center; position:relative; background:radial-gradient(circle at 50% 45%, #3f4936 0, #1a221b 25%, #141714 58%, #10130f 100%); overflow:hidden; }
+.product-art { height:440px; display:grid; place-items:center; position:relative; background:radial-gradient(circle at 50% 45%, #3f4936 0, #1a221b 25%, #141714 58%, #10130f 100%); overflow:hidden; }
 .product-card:nth-child(2) .product-art { background:radial-gradient(circle at 52% 43%, #65563d 0, #312b20 29%, #181915 72%); }
 .product-card:nth-child(3) .product-art { background:radial-gradient(circle at 50% 42%, #4d3f4c 0, #29232b 30%, #171719 72%); }
 .product-art::after { content:''; position:absolute; width:270px; height:270px; border:1px solid rgba(201,169,97,.12); border-radius:50%; }
-.product-photo { position:relative; z-index:1; width:100%; height:100%; box-sizing:border-box; padding:14px 20px; object-fit:contain; object-position:center; mix-blend-mode:normal; filter:saturate(.82) contrast(1.05); transition:transform .5s ease, filter .5s ease; }
-.product-card:hover .product-photo { transform:scale(1.035); filter:saturate(.9) contrast(1.08); }
+.product-image-button { position:relative; z-index:1; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:zoom-in; display:block; }
+.product-photo { position:relative; z-index:1; display:block; width:100%; height:100%; box-sizing:border-box; padding:0; object-fit:cover; object-position:center 54%; mix-blend-mode:normal; filter:saturate(.82) contrast(1.05); transition:filter .5s ease; }
+.product-card:hover .product-photo { filter:saturate(.9) contrast(1.08); }
+.image-modal { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:32px; background:rgba(7,8,6,.94); cursor:zoom-out; }
+.image-modal img { max-width:min(92vw, 980px); max-height:92vh; width:auto; height:auto; object-fit:contain; box-shadow:0 25px 70px rgba(0,0,0,.55); }
+.image-modal-close { position:absolute; top:22px; left:22px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(201,169,97,.45); background:rgba(16,19,15,.8); color:var(--gold-light); cursor:pointer; }
 .bottle { width:117px; height:210px; position:relative; z-index:1; border:1px solid rgba(228,207,166,.55); background:linear-gradient(100deg,rgba(255,255,255,.14),rgba(201,169,97,.17) 48%,rgba(0,0,0,.25)); border-radius:13px 13px 24px 24px; box-shadow:16px 25px 28px rgba(0,0,0,.4); display:flex; justify-content:center; align-items:center; }
 .bottle::before { content:''; position:absolute; top:-47px; width:45px; height:48px; border:1px solid rgba(228,207,166,.55); background:linear-gradient(90deg,#4e3e27,#c4a76a,#493a27); }
 .bottle::after { content:'OXY'; position:absolute; font-family:var(--app-font-serif); font-size:31px; letter-spacing:.1em; color:rgba(236,218,178,.82); transform:rotate(-90deg); }
@@ -285,7 +289,7 @@ a { color: inherit; text-decoration: none; }
   .section-top, .testimonials-top, .newsletter-inner { display:block; }
   .section-intro { margin-top:22px; } .collection { padding:90px 0 110px; }
   .products-grid { grid-template-columns:1fr; gap:18px; } .product-card, .product-card:nth-child(2) { min-height:0; transform:none; } .product-card:nth-child(2):hover { transform:translateY(-10px); }
-  .product-art { height:280px; } .notes-section { padding:100px 0; } .notes-wheel { transform:scale(.72); transform-origin:center; margin:-40px 0; }
+  .product-art { height:340px; } .notes-section { padding:100px 0; } .notes-wheel { transform:scale(.72); transform-origin:center; margin:-40px 0; }
   .story { padding:90px 0; } .story-details { gap:12px; } .story-details strong { font-size:23px; }
   .testimonials { padding:90px 0; } .quote-grid { grid-template-columns:1fr; } .quote, .quote.featured { min-height:200px; }
   .newsletter { padding:70px 0; } .newsletter-inner { padding:48px 24px; } .newsletter-copy h2 { font-size:40px; } .newsletter-form { margin-top:40px; }
