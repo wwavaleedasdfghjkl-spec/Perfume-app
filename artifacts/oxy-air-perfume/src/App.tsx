@@ -29,8 +29,7 @@ type Product = {
   image: string;
 };
 
-type PricedProduct = Product & { price: number };
-type CartItem = PricedProduct & { quantity: number };
+type CartItem = Product & { quantity: number };
 
 // Product names and prices are intentionally centralized here for easy future editing.
 // Prices remain blank until the catalog prices are provided.
@@ -89,6 +88,7 @@ function Home() {
 
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
   const cartTotal = useMemo(() => cart.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0), [cart]);
+  const hasUnknownPrice = useMemo(() => cart.some((item) => item.price === null), [cart]);
 
   const goTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -96,12 +96,10 @@ function Home() {
   };
 
   const addToCart = (product: Product) => {
-    if (product.price === null) return;
-    const pricedProduct = product as PricedProduct;
     setCart((current) => {
-      const existing = current.find((item) => item.id === pricedProduct.id);
-      if (existing) return current.map((item) => item.id === pricedProduct.id ? { ...item, quantity: item.quantity + 1 } : item);
-      return [...current, { ...pricedProduct, quantity: 1 }];
+      const existing = current.find((item) => item.id === product.id);
+      if (existing) return current.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+      return [...current, { ...product, quantity: 1 }];
     });
     setCartOpen(true);
   };
@@ -115,13 +113,13 @@ function Home() {
   const handleOrder = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!cart.length || !checkout.name || !checkout.phone || !checkout.address || !checkout.city) return;
-    const orderLines = cart.map((item) => `• ${item.name} (${item.latin}) × ${item.quantity} — ${formatIQD(item.price * item.quantity)}`).join('\n');
+    const orderLines = cart.map((item) => `• ${item.name} × ${item.quantity} — ${item.price === null ? 'السعر يحدد لاحقاً' : formatIQD(item.price * item.quantity)}`).join('\n');
     const message = [
       'مرحباً OXY، أود تأكيد طلبي:',
       '',
       orderLines,
       '',
-      `المجموع: ${formatIQD(cartTotal)}`,
+      `المجموع: ${hasUnknownPrice ? 'السعر يحدد لاحقاً' : formatIQD(cartTotal)}`,
       `الاسم: ${checkout.name}`,
       `الهاتف: ${checkout.phone}`,
       `المحافظة / المدينة: ${checkout.city}`,
@@ -212,7 +210,7 @@ function Home() {
                       <p className="product-notes">{product.notes || '\u00a0'}</p>
                       <div className="product-bottom">
                         <span className={`price ${product.price === null ? 'price-pending' : ''}`} data-testid={`text-price-${product.id}`}>{product.price === null ? 'السعر يحدد لاحقاً' : formatIQD(product.price)} {product.price !== null && <small>50 مل</small>}</span>
-                        <button className="add-button" aria-label={product.price === null ? 'السعر غير محدد بعد' : `أضف ${product.name} إلى السلة`} data-testid={`button-add-${product.id}`} onClick={() => addToCart(product)} disabled={product.price === null}>
+                         <button className="add-button" aria-label={`أضف ${product.name} إلى السلة`} data-testid={`button-add-${product.id}`} onClick={() => addToCart(product)}>
                           <Plus size={16} strokeWidth={1.3} />
                         </button>
                       </div>
@@ -318,16 +316,16 @@ function Home() {
         ) : (
           <>
             <div className="cart-list">
-              {cart.length === 0 ? <div className="cart-empty" data-testid="text-empty-cart">لا توجد منتجات في السلة.<br /><small>أضف منتجاً بعد ظهور السعر.</small></div> : cart.map((item) => (
+              {cart.length === 0 ? <div className="cart-empty" data-testid="text-empty-cart">لا توجد منتجات في السلة.<br /><small>أضف أي جهاز للمتابعة.</small></div> : cart.map((item) => (
                 <div className="cart-item" key={item.id} data-testid={`row-cart-item-${item.id}`}>
                    <div className="cart-thumb"><img src={item.image} alt="" /></div>
-                  <div><h3>{item.name} <span className="product-latin">{item.latin}</span></h3><p>{formatIQD(item.price)} للزجاجة</p><div className="qty-controls"><button aria-label={`إنقاص كمية ${item.name}`} data-testid={`button-decrease-${item.id}`} onClick={() => changeQuantity(item.id, -1)}><Minus size={12} /></button><span data-testid={`text-quantity-${item.id}`}>{item.quantity}</span><button aria-label={`زيادة كمية ${item.name}`} data-testid={`button-increase-${item.id}`} onClick={() => changeQuantity(item.id, 1)}><Plus size={12} /></button></div></div>
-                  <div className="cart-item-price">{formatIQD(item.price * item.quantity)}</div>
+                  <div><h3>{item.name} <span className="product-latin">{item.latin}</span></h3><p>{item.price === null ? 'السعر يحدد لاحقاً' : `${formatIQD(item.price)} للجهاز`}</p><div className="qty-controls"><button aria-label={`إنقاص كمية ${item.name}`} data-testid={`button-decrease-${item.id}`} onClick={() => changeQuantity(item.id, -1)}><Minus size={12} /></button><span data-testid={`text-quantity-${item.id}`}>{item.quantity}</span><button aria-label={`زيادة كمية ${item.name}`} data-testid={`button-increase-${item.id}`} onClick={() => changeQuantity(item.id, 1)}><Plus size={12} /></button></div></div>
+                   <div className="cart-item-price">{item.price === null ? '—' : formatIQD(item.price * item.quantity)}</div>
                 </div>
               ))}
             </div>
             <div className="drawer-summary">
-              <div className="summary-row"><span>المجموع الكلي</span><strong data-testid="text-cart-total">{formatIQD(cartTotal)}</strong></div>
+               <div className="summary-row"><span>المجموع الكلي</span><strong data-testid="text-cart-total">{hasUnknownPrice ? 'السعر يحدد لاحقاً' : formatIQD(cartTotal)}</strong></div>
               {cart.length > 0 && <form className="checkout-form" onSubmit={handleOrder}>
                 <label>الاسم الكامل<input value={checkout.name} onChange={(event) => setCheckout({ ...checkout, name: event.target.value })} placeholder="مثال: نور الهدى" data-testid="input-checkout-name" required /></label>
                 <label>رقم الهاتف<input type="tel" value={checkout.phone} onChange={(event) => setCheckout({ ...checkout, phone: event.target.value })} placeholder="07xx xxx xxxx" data-testid="input-checkout-phone" required /></label>
@@ -336,7 +334,7 @@ function Home() {
                 <label>ملاحظات إضافية <span style={{ color: '#70685e' }}>(اختياري)</span><textarea value={checkout.notes} onChange={(event) => setCheckout({ ...checkout, notes: event.target.value })} placeholder="وقت التوصيل المفضل..." data-testid="input-checkout-notes" /></label>
                 <button type="submit" className="button-primary" data-testid="button-submit-order"><ShoppingBag size={14} /> اطلب عبر واتساب</button>
               </form>}
-              <p className="drawer-footnote"><Sparkles size={11} /> الدفع عند الاستلام · التوصيل حسب المحافظة</p>
+              <p className="drawer-footnote"><Sparkles size={11} /> الدفع عند الاستلام · السعر يحدد لاحقاً عند عدم توفره</p>
             </div>
           </>
         )}
