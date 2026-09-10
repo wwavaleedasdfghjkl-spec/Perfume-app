@@ -47,7 +47,7 @@ const PRODUCTS: Product[] = [
 ];
 
 // WhatsApp number for orders — update here if the customer service line changes.
-const WHATSAPP_NUMBER = '9647756344191';
+const WHATSAPP_NUMBER = '9647769079604';
 
 const formatIQD = (value: number) => `${new Intl.NumberFormat('ar-IQ').format(value)} د.ع`;
 
@@ -296,7 +296,7 @@ function Home() {
               <p className="footer-copy">صفحة عرض وطلب لعطور OXY. اختر المنتج، راجع السعر، وأرسل الطلب عبر WhatsApp.</p>
             </div>
             <div><h4>روابط عملية</h4><ul><li><a href="#collection" data-testid="link-footer-collection">المنتجات</a></li><li><a href="#story" data-testid="link-footer-story">طريقة الطلب</a></li><li><a href="#notes" data-testid="link-footer-notes">تفاصيل المنتج</a></li></ul></div>
-            <div><h4>للطلب</h4><div className="footer-contact"><strong>واتساب</strong><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" data-testid="link-whatsapp">+964 775 634 4191</a><strong style={{ marginTop: 12 }}>بغداد · العراق</strong><span>الدفع عند الاستلام</span></div></div>
+            <div><h4>للطلب</h4><div className="footer-contact"><strong>واتساب</strong><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" data-testid="link-whatsapp">+964 776 907 9604</a><strong style={{ marginTop: 12 }}>بغداد · العراق</strong><span>الدفع عند الاستلام</span></div></div>
             <div><h4>التواصل</h4><ul><li><a href="https://instagram.com" target="_blank" rel="noreferrer" data-testid="link-instagram"><Instagram size={14} strokeWidth={1.3} /> @oxy.air.perfume</a></li><li><a href="mailto:hello@oxyairperfume.com" data-testid="link-email">البريد الإلكتروني</a></li></ul></div>
           </div>
           <div className="footer-bottom"><span>© OXY AIR PERFUME · جميع الحقوق محفوظة.</span><span>معلومات الطلب والتوصيل داخل الموقع</span></div>
