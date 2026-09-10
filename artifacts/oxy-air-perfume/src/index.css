@@ -147,7 +147,7 @@ a { color: inherit; text-decoration: none; }
 .product-number { font-family:var(--app-font-serif); color:#70685e; font-size:16px; direction:ltr; display:block; margin-bottom:13px; }
 .product-name { margin:0; font-size:23px; font-weight:500; color:var(--paper); }
 .product-latin { color:var(--gold); font-family:var(--app-font-serif); font-size:18px; direction:ltr; margin-right:9px; }
-.product-notes { font-size:11px; color:#8f877b; margin:10px 0 24px; line-height:2; }
+.product-notes { font-size:11px; color:#8f877b; margin:10px 0 24px; line-height:2; white-space:pre-line; }
 .product-bottom { display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(201,169,97,.16); padding-top:16px; }
 .price { font-family:var(--app-font-serif); font-size:19px; color:var(--gold-light); direction:rtl; }
 .price-pending { color:#8f877b; font-family:var(--app-font-sans); font-size:10px; }

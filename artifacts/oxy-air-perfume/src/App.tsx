@@ -32,19 +32,19 @@ type Product = {
 type PricedProduct = Product & { price: number };
 type CartItem = PricedProduct & { quantity: number };
 
-// Product prices are intentionally centralized here for easy future editing.
-// Product names and prices are intentionally blank until the catalog details are provided.
+// Product names and prices are intentionally centralized here for easy future editing.
+// Prices remain blank until the catalog prices are provided.
 const PRODUCTS: Product[] = [
-  { id: 'product-01', number: '01', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage0 },
-  { id: 'product-02', number: '02', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage1 },
-  { id: 'product-03', number: '03', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage2 },
-  { id: 'product-04', number: '04', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage3 },
-  { id: 'product-05', number: '05', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage4 },
-  { id: 'product-06', number: '06', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage5 },
-  { id: 'product-07', number: '07', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage6 },
-  { id: 'product-08', number: '08', name: '', latin: '', notes: '', price: null, color: 'amber', image: productImage7 },
-  { id: 'product-09', number: '09', name: '', latin: '', notes: '', price: null, color: 'plum', image: productImage8 },
-  { id: 'product-10', number: '10', name: '', latin: '', notes: '', price: null, color: 'sage', image: productImage9 },
+  { id: 'product-01', number: '01', name: 'جهاز C-40', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 140 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage0 },
+  { id: 'product-02', number: '02', name: 'جهاز C-50', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage1 },
+  { id: 'product-03', number: '03', name: 'جهاز C-60', latin: '', notes: 'مناسب لتغطية مساحة: 200 إلى 250 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage2 },
+  { id: 'product-04', number: '04', name: 'جهاز L', latin: '', notes: 'مناسب لتغطية مساحة: 300 إلى 450 م²\nكمية العطر المطلوبة: 1 لتر\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage3 },
+  { id: 'product-05', number: '05', name: 'جهاز C-45', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage4 },
+  { id: 'product-06', number: '06', name: 'جهاز C-55', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 120 م²\nكمية العطر المطلوبة: 320 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage5 },
+  { id: 'product-07', number: '07', name: 'جهاز C-10', latin: '', notes: 'مناسب لتغطية مساحة: 10 إلى 20 م²\nكمية العطر المطلوبة: 100 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage6 },
+  { id: 'product-08', number: '08', name: 'جهاز C-30', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 100 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage7 },
+  { id: 'product-09', number: '09', name: 'جهاز C-35', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 120 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage8 },
+  { id: 'product-10', number: '10', name: 'جهاز C-20', latin: '', notes: 'مناسب لتغطية مساحة: 60 إلى 80 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage9 },
 ];
 
 // WhatsApp number for orders — update here if the customer service line changes.
