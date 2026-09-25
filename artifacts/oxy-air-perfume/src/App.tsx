@@ -24,32 +24,28 @@ type Product = {
   name: string;
   latin: string;
   notes: string;
-  price: number | null;
   color: string;
   image: string;
 };
 
 type CartItem = Product & { quantity: number };
 
-// Product names and prices are intentionally centralized here for easy future editing.
-// Prices remain blank until the catalog prices are provided.
+// Product names and descriptions are centralized here for easy future editing.
 const PRODUCTS: Product[] = [
-  { id: 'product-01', number: '01', name: 'جهاز C-40', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 140 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage0 },
-  { id: 'product-02', number: '02', name: 'جهاز C-50', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage1 },
-  { id: 'product-03', number: '03', name: 'جهاز C-60', latin: '', notes: 'مناسب لتغطية مساحة: 200 إلى 250 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage2 },
-  { id: 'product-04', number: '04', name: 'جهاز L', latin: '', notes: 'مناسب لتغطية مساحة: 300 إلى 450 م²\nكمية العطر المطلوبة: 1 لتر\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage3 },
-  { id: 'product-05', number: '05', name: 'جهاز C-45', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage4 },
-  { id: 'product-06', number: '06', name: 'جهاز C-55', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 120 م²\nكمية العطر المطلوبة: 320 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage5 },
-  { id: 'product-07', number: '07', name: 'جهاز C-10', latin: '', notes: 'مناسب لتغطية مساحة: 10 إلى 20 م²\nكمية العطر المطلوبة: 100 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage6 },
-  { id: 'product-08', number: '08', name: 'جهاز C-30', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 100 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'amber', image: productImage7 },
-  { id: 'product-09', number: '09', name: 'جهاز C-35', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 120 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'plum', image: productImage8 },
-  { id: 'product-10', number: '10', name: 'جهاز C-20', latin: '', notes: 'مناسب لتغطية مساحة: 60 إلى 80 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', price: null, color: 'sage', image: productImage9 },
+  { id: 'product-01', number: '01', name: 'جهاز C-40', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 140 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', color: 'sage', image: productImage0 },
+  { id: 'product-02', number: '02', name: 'جهاز C-50', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', color: 'amber', image: productImage1 },
+  { id: 'product-03', number: '03', name: 'جهاز C-60', latin: '', notes: 'مناسب لتغطية مساحة: 200 إلى 250 م²\nكمية العطر المطلوبة: 500 مل\nعطر هدية لأول مرة', color: 'plum', image: productImage2 },
+  { id: 'product-04', number: '04', name: 'جهاز L', latin: '', notes: 'مناسب لتغطية مساحة: 300 إلى 450 م²\nكمية العطر المطلوبة: 1 لتر\nعطر هدية لأول مرة', color: 'sage', image: productImage3 },
+  { id: 'product-05', number: '05', name: 'جهاز C-45', latin: '', notes: 'مناسب لتغطية مساحة: 120 إلى 150 م²\nكمية العطر المطلوبة: 200 مل\nعطر هدية لأول مرة', color: 'amber', image: productImage4 },
+  { id: 'product-06', number: '06', name: 'جهاز C-55', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 120 م²\nكمية العطر المطلوبة: 320 مل\nعطر هدية لأول مرة', color: 'plum', image: productImage5 },
+  { id: 'product-07', number: '07', name: 'جهاز C-10', latin: '', notes: 'مناسب لتغطية مساحة: 10 إلى 20 م²\nكمية العطر المطلوبة: 100 مل\nعطر هدية لأول مرة', color: 'sage', image: productImage6 },
+  { id: 'product-08', number: '08', name: 'جهاز C-30', latin: '', notes: 'مناسب لتغطية مساحة: 80 إلى 100 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', color: 'amber', image: productImage7 },
+  { id: 'product-09', number: '09', name: 'جهاز C-35', latin: '', notes: 'مناسب لتغطية مساحة: 100 إلى 120 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', color: 'plum', image: productImage8 },
+  { id: 'product-10', number: '10', name: 'جهاز C-20', latin: '', notes: 'مناسب لتغطية مساحة: 60 إلى 80 م²\nكمية العطر المطلوبة: 160 مل\nعطر هدية لأول مرة', color: 'sage', image: productImage9 },
 ];
 
 // WhatsApp number for orders — update here if the customer service line changes.
 const WHATSAPP_NUMBER = '9647769079604';
-
-const formatIQD = (value: number) => `${new Intl.NumberFormat('ar-IQ').format(value)} د.ع`;
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -87,8 +83,6 @@ function Home() {
   const [checkout, setCheckout] = useState({ name: '', phone: '', address: '', city: '', notes: '' });
 
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
-  const cartTotal = useMemo(() => cart.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0), [cart]);
-  const hasUnknownPrice = useMemo(() => cart.some((item) => item.price === null), [cart]);
 
   const goTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -113,13 +107,13 @@ function Home() {
   const handleOrder = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!cart.length || !checkout.name || !checkout.phone || !checkout.address || !checkout.city) return;
-    const orderLines = cart.map((item) => `• ${item.name} × ${item.quantity} — ${item.price === null ? 'السعر يحدد لاحقاً' : formatIQD(item.price * item.quantity)}`).join('\n');
+    const orderLines = cart.map((item) => `• ${item.name} × ${item.quantity}`).join('\n');
     const message = [
       'مرحباً OXY، أود تأكيد طلبي:',
       '',
       orderLines,
       '',
-      `المجموع: ${hasUnknownPrice ? 'السعر يحدد لاحقاً' : formatIQD(cartTotal)}`,
+      'السعر يتم الاتفاق عليه عبر WhatsApp',
       `الاسم: ${checkout.name}`,
       `الهاتف: ${checkout.phone}`,
       `المحافظة / المدينة: ${checkout.city}`,
@@ -159,7 +153,7 @@ function Home() {
           <Reveal className="hero-copy">
             <div className="hero-english">OXY AIR PERFUME</div>
             <h1>عطور OXY<br /><span>للاستخدام اليومي</span></h1>
-            <p className="hero-description">اختر المنتج من القائمة، راجع الصورة والرقم والسعر، ثم أضفه إلى السلة وأرسل بيانات الطلب عبر WhatsApp.</p>
+            <p className="hero-description">اختر المنتج من القائمة، راجع الصورة والرقم والوصف، ثم أضفه إلى السلة وأرسل بيانات الطلب عبر WhatsApp.</p>
             <div className="hero-cta">
               <button className="button-primary" data-testid="button-explore-collection" onClick={() => goTo('collection')}>عرض المنتجات</button>
               <button className="button-ghost" data-testid="button-read-story" onClick={() => goTo('story')}>طريقة الطلب <ArrowLeft size={14} strokeWidth={1.4} /></button>
@@ -168,7 +162,7 @@ function Home() {
           <Reveal className="hero-mark reveal-delay-2">
             <div className="halo" />
             <img src={oxyLogo} alt="علامة OXY الذهبية" className="hero-logo-image" />
-            <div className="hero-side-note">عطور · 50 مل · الدفع عند الاستلام</div>
+            <div className="hero-side-note">أجهزة · عطر هدية لأول مرة · الدفع عند الاستلام</div>
           </Reveal>
           <div className="scroll-note"><i /> انتقل إلى المنتجات</div>
         </section>
@@ -177,7 +171,7 @@ function Home() {
           <div className="container intro-grid">
             <Reveal className="intro-copy">
               <strong>معلومات سريعة</strong>
-              منتجات OXY عطور للاستخدام اليومي والمناسبات. كل بطاقة توضح صورة المنتج ورقمه وسعره. المنتج الذي لا يحتوي على سعر يبقى غير متاح للطلب حتى يتم تحديث بياناته.
+              أجهزة OXY مخصصة لتعطير المساحات المختلفة. كل بطاقة توضح صورة الجهاز ورقمه ومساحة التغطية وكمية العطر المطلوبة.
             </Reveal>
             <Reveal className="intro-statement reveal-delay-1">
               اختر المنتج،<br />ثم أرسل الطلب.
@@ -192,7 +186,7 @@ function Home() {
                 <SectionEyebrow>PRODUCTS · OXY</SectionEyebrow>
                 <h2 className="section-heading">منتجات OXY<br /><span className="gold">المتاحة حالياً</span></h2>
               </div>
-              <p className="section-intro">اختر المنتج المناسب لك. اضغط زر الإضافة بعد إدخال الاسم والسعر حتى يصبح المنتج جاهزاً للطلب.</p>
+              <p className="section-intro">اختر الجهاز المناسب لك، ثم اضغط زر الإضافة وأرسل طلبك عبر WhatsApp للاتفاق على التفاصيل.</p>
               <span className="collection-index">01 — 10</span>
             </Reveal>
             <div className="products-grid">
@@ -209,7 +203,6 @@ function Home() {
                       <h3 className="product-name">{product.name || '\u00a0'} {product.latin && <span className="product-latin">{product.latin}</span>}</h3>
                       <p className="product-notes">{product.notes || '\u00a0'}</p>
                       <div className="product-bottom">
-                        <span className={`price ${product.price === null ? 'price-pending' : ''}`} data-testid={`text-price-${product.id}`}>{product.price === null ? 'السعر يحدد لاحقاً' : formatIQD(product.price)} {product.price !== null && <small>50 مل</small>}</span>
                          <button className="add-button" aria-label={`أضف ${product.name} إلى السلة`} data-testid={`button-add-${product.id}`} onClick={() => addToCart(product)}>
                           <Plus size={16} strokeWidth={1.3} />
                         </button>
@@ -226,7 +219,7 @@ function Home() {
           <div className="container notes-layout">
             <Reveal className="notes-wheel">
               <div className="wheel-center">OXY<small>معلومات المنتج</small></div>
-              <div className="note-item note-top"><b>50 مل</b>حجم العبوة</div>
+              <div className="note-item note-top"><b>عطر هدية</b>لأول مرة</div>
               <div className="note-item note-right"><b>عطر</b>نوع المنتج</div>
               <div className="note-item note-bottom"><b>واتساب</b>طريقة الطلب</div>
               <div className="note-item note-left"><b>كاش</b>طريقة الدفع</div>
@@ -235,9 +228,9 @@ function Home() {
               <SectionEyebrow>PRODUCT DETAILS</SectionEyebrow>
               <h2 className="section-heading">معلومات<br /><span className="gold">عملية للطلب.</span></h2>
               <h3>قبل الإضافة إلى السلة</h3>
-              <p>تأكد من ظهور اسم المنتج وسعره. المنتجات التي لا تحتوي على سعر ستبقى غير قابلة للإضافة حتى يتم تحديث البيانات.</p>
+              <p>اختر الجهاز حسب مساحة التغطية وكمية العطر المطلوبة. بعد إضافة الجهاز إلى السلة، يتم الاتفاق على السعر والتفاصيل عبر WhatsApp.</p>
               <div className="notes-list">
-                {['حجم العبوة: 50 مل', 'الدفع: عند الاستلام', 'الطلب: عبر WhatsApp', 'التوصيل: داخل العراق'].map((note) => <span className="note-pill" key={note}>{note}</span>)}
+                {['العطر: هدية لأول مرة', 'الدفع: عند الاستلام', 'الطلب: عبر WhatsApp', 'التوصيل: داخل العراق'].map((note) => <span className="note-pill" key={note}>{note}</span>)}
               </div>
             </Reveal>
           </div>
@@ -293,7 +286,7 @@ function Home() {
           <div className="footer-grid">
             <div className="footer-brand">
               <img src={oxyLogo} alt="OXY Air Perfume" className="footer-logo" />
-              <p className="footer-copy">صفحة عرض وطلب لعطور OXY. اختر المنتج، راجع السعر، وأرسل الطلب عبر WhatsApp.</p>
+              <p className="footer-copy">صفحة عرض وطلب لأجهزة OXY. اختر الجهاز، راجع المواصفات، وأرسل الطلب عبر WhatsApp.</p>
             </div>
             <div><h4>روابط عملية</h4><ul><li><a href="#collection" data-testid="link-footer-collection">المنتجات</a></li><li><a href="#story" data-testid="link-footer-story">طريقة الطلب</a></li><li><a href="#notes" data-testid="link-footer-notes">تفاصيل المنتج</a></li></ul></div>
             <div><h4>للطلب</h4><div className="footer-contact"><strong>واتساب</strong><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" data-testid="link-whatsapp">+964 776 907 9604</a><strong style={{ marginTop: 12 }}>بغداد · العراق</strong><span>الدفع عند الاستلام</span></div></div>
@@ -319,13 +312,11 @@ function Home() {
               {cart.length === 0 ? <div className="cart-empty" data-testid="text-empty-cart">لا توجد منتجات في السلة.<br /><small>أضف أي جهاز للمتابعة.</small></div> : cart.map((item) => (
                 <div className="cart-item" key={item.id} data-testid={`row-cart-item-${item.id}`}>
                    <div className="cart-thumb"><img src={item.image} alt="" /></div>
-                  <div><h3>{item.name} <span className="product-latin">{item.latin}</span></h3><p>{item.price === null ? 'السعر يحدد لاحقاً' : `${formatIQD(item.price)} للجهاز`}</p><div className="qty-controls"><button aria-label={`إنقاص كمية ${item.name}`} data-testid={`button-decrease-${item.id}`} onClick={() => changeQuantity(item.id, -1)}><Minus size={12} /></button><span data-testid={`text-quantity-${item.id}`}>{item.quantity}</span><button aria-label={`زيادة كمية ${item.name}`} data-testid={`button-increase-${item.id}`} onClick={() => changeQuantity(item.id, 1)}><Plus size={12} /></button></div></div>
-                   <div className="cart-item-price">{item.price === null ? '—' : formatIQD(item.price * item.quantity)}</div>
+                  <div><h3>{item.name} <span className="product-latin">{item.latin}</span></h3><div className="qty-controls"><button aria-label={`إنقاص كمية ${item.name}`} data-testid={`button-decrease-${item.id}`} onClick={() => changeQuantity(item.id, -1)}><Minus size={12} /></button><span data-testid={`text-quantity-${item.id}`}>{item.quantity}</span><button aria-label={`زيادة كمية ${item.name}`} data-testid={`button-increase-${item.id}`} onClick={() => changeQuantity(item.id, 1)}><Plus size={12} /></button></div></div>
                 </div>
               ))}
             </div>
             <div className="drawer-summary">
-               <div className="summary-row"><span>المجموع الكلي</span><strong data-testid="text-cart-total">{hasUnknownPrice ? 'السعر يحدد لاحقاً' : formatIQD(cartTotal)}</strong></div>
               {cart.length > 0 && <form className="checkout-form" onSubmit={handleOrder}>
                 <label>الاسم الكامل<input value={checkout.name} onChange={(event) => setCheckout({ ...checkout, name: event.target.value })} placeholder="مثال: نور الهدى" data-testid="input-checkout-name" required /></label>
                 <label>رقم الهاتف<input type="tel" value={checkout.phone} onChange={(event) => setCheckout({ ...checkout, phone: event.target.value })} placeholder="07xx xxx xxxx" data-testid="input-checkout-phone" required /></label>
@@ -334,7 +325,7 @@ function Home() {
                 <label>ملاحظات إضافية <span style={{ color: '#70685e' }}>(اختياري)</span><textarea value={checkout.notes} onChange={(event) => setCheckout({ ...checkout, notes: event.target.value })} placeholder="وقت التوصيل المفضل..." data-testid="input-checkout-notes" /></label>
                 <button type="submit" className="button-primary" data-testid="button-submit-order"><ShoppingBag size={14} /> اطلب عبر واتساب</button>
               </form>}
-              <p className="drawer-footnote"><Sparkles size={11} /> الدفع عند الاستلام · السعر يحدد لاحقاً عند عدم توفره</p>
+              <p className="drawer-footnote"><Sparkles size={11} /> السعر يتم الاتفاق عليه عبر WhatsApp · الدفع عند الاستلام</p>
             </div>
           </>
         )}
