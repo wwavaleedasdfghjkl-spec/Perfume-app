@@ -128,7 +128,6 @@ function Home() {
 
   return (
     <div className="oxy-app">
-      <div className="topbar">التوصيل داخل بغداد مجاني للطلبات فوق <strong>١٠٠,٠٠٠ د.ع</strong></div>
       <header className="nav">
         <button className="icon-button menu-button" aria-label="فتح القائمة" data-testid="button-menu" onClick={() => setMobileMenu((value) => !value)}>
           <Menu size={17} strokeWidth={1.3} />
@@ -151,9 +150,10 @@ function Home() {
       <main>
         <section className="hero container" id="home">
           <Reveal className="hero-copy">
-            <div className="hero-english">OXY AIR PERFUME</div>
-            <h1>عطور OXY<br /><span>للاستخدام اليومي</span></h1>
-            <p className="hero-description">اختر المنتج من القائمة، راجع الصورة والرقم والوصف، ثم أضفه إلى السلة وأرسل بيانات الطلب عبر WhatsApp.</p>
+            <div className="hero-english">OXY Air Perfume</div>
+            <h1>خلّي لمكانك<br /><span>بصمة ما تُنسى.</span></h1>
+            <p className="hero-description">نقدّم حلولاً متطورة لتعطير الأماكن، من خلال أجهزة التعطير بالنانو وعطور مختارة بعناية، لنمنح الفنادق والمطاعم والمحلات والمكاتب أجواءً مميزة ورائحة تدوم في ذاكرة الزبون.</p>
+            <p className="hero-tagline">OXY Air Perfume — لأن الرائحة جزء من هوية المكان.</p>
             <div className="hero-cta">
               <button className="button-primary" data-testid="button-explore-collection" onClick={() => goTo('collection')}>عرض المنتجات</button>
               <button className="button-ghost" data-testid="button-read-story" onClick={() => goTo('story')}>طريقة الطلب <ArrowLeft size={14} strokeWidth={1.4} /></button>
@@ -320,7 +320,7 @@ function Home() {
               {cart.length > 0 && <form className="checkout-form" onSubmit={handleOrder}>
                 <label>الاسم الكامل<input value={checkout.name} onChange={(event) => setCheckout({ ...checkout, name: event.target.value })} placeholder="مثال: نور الهدى" data-testid="input-checkout-name" required /></label>
                 <label>رقم الهاتف<input type="tel" value={checkout.phone} onChange={(event) => setCheckout({ ...checkout, phone: event.target.value })} placeholder="07xx xxx xxxx" data-testid="input-checkout-phone" required /></label>
-                <label>المحافظة / المدينة<select value={checkout.city} onChange={(event) => setCheckout({ ...checkout, city: event.target.value })} data-testid="select-checkout-city" required><option value="">اختر المحافظة</option><option>بغداد</option><option>البصرة</option><option>أربيل</option><option>النجف</option><option>كربلاء</option><option>الموصل</option><option>أخرى</option></select></label>
+                <label>المحافظة / المدينة<select value={checkout.city} onChange={(event) => setCheckout({ ...checkout, city: event.target.value })} data-testid="select-checkout-city" required><option value="">اختر المحافظة</option><option>بغداد</option><option>البصرة</option><option>نينوى</option><option>أربيل</option><option>السليمانية</option><option>دهوك</option><option>كركوك</option><option>النجف</option><option>كربلاء</option><option>بابل</option><option>واسط</option><option>ديالى</option><option>الأنبار</option><option>صلاح الدين</option><option>ذي قار</option><option>ميسان</option><option>المثنى</option><option>القادسية (الديوانية)</option><option>حلبجة</option><option>أخرى</option></select></label>
                 <label>العنوان بالتفصيل<textarea value={checkout.address} onChange={(event) => setCheckout({ ...checkout, address: event.target.value })} placeholder="المنطقة، الشارع، أقرب نقطة دالة" data-testid="input-checkout-address" required /></label>
                 <label>ملاحظات إضافية <span style={{ color: '#70685e' }}>(اختياري)</span><textarea value={checkout.notes} onChange={(event) => setCheckout({ ...checkout, notes: event.target.value })} placeholder="وقت التوصيل المفضل..." data-testid="input-checkout-notes" /></label>
                 <button type="submit" className="button-primary" data-testid="button-submit-order"><ShoppingBag size={14} /> اطلب عبر واتساب</button>
